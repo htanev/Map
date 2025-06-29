@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Map - Polished</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    
+    <!-- Fullscreen plugin -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.fullscreen@1.6.0/Control.FullScreen.css" />
+    <script src="https://unpkg.com/leaflet.fullscreen@1.6.0/Control.FullScreen.js"></script>
+    
+    <!-- MarkerCluster plugin -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+
+    <style>
+        #map { height: 600px; width: 100%; }
+        .popup-image { max-width: 100px; height: auto; margin-bottom: 5px; }
+        #legend {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px;
+            font-size: 13px;
+            z-index: 1000;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Events in the World</h1>
+    <div id="map"></div>
+    <div id="legend">
+        <b>Event Types</b><br>
+        <img src="./MilitaryIcon.png" width="20" /> Military<br>
+        <img src="./ProtestIcon.png" width="20" /> Protest<br>
+        <img src="./TerrorismIcon.png" width="20" /> Terrorism<br>
+        <img src="./DisasterIcon.png" width="20" /> Disaster/Accident<br>
+        <img src="./NDIcon.png" width="20" /> Natural Disaster<br>
+        <img src="./HumanitarianCrisisIcon.png" width="20" /> Humanitarian<br>
+    </div>
+
+    <script>
+        var map = L.map('map', {
+            fullscreenControl: true
+        }).setView([20, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        var markers = L.markerClusterGroup();
+
+        function createIcon(url) {
+            return L.icon({
+                iconUrl: './' + url,
+                iconSize: [40, 40],
+                iconAnchor: [20, 20],
+                popupAnchor: [0, -10]
+            });
+        }
+
+        var icons = {
+            "military": createIcon("MilitaryIcon.png"),
+            "protest/unrest": createIcon("ProtestIcon.png"),
+            "terrorism": createIcon("TerrorismIcon.png"),
+            "disaster": createIcon("DisasterIcon.png"),
+            "accident": createIcon("DisasterIcon.png"),
+            "explosion": createIcon("ExplosionIcon.png"),
+            "natural disaster": createIcon("NDIcon.png"),
+            "humanitarian crisis": createIcon("HumanitarianCrisisIcon.png"),
+            "piracy": createIcon("PiracyIcon.png"),
+            "cyber crime": createIcon("CyberCrimeIcon.png"),
+            "assassination": createIcon("AssassinationIcon.png"),
+            "unknown": createIcon("UnknownIcon.png"),
+            "violent": createIcon("UnknownIcon.png"),
+            "news": createIcon("UnknownIcon.png"),
+            "law enforcement": createIcon("Police.png")
+        };
+
+        // Placeholder: Add markers here, e.g.:
+        // var marker = L.marker([lat, lng], {icon: icons["military"]}).bindPopup("Info...");
+        // markers.addLayer(marker);
+
+                var marker =  null;
+    
+               marker = L.marker([35.69439, 51.62151], {icon: icons["protest/unrest"]}).bindPopup("<a href='https://www.ndtv.com/world-news/iran-says-71-killed-in-israeli-strike-on-evin-prison-8789902#publisher=newsstand'  target='_blank'> <b>Iran Says 71 Killed In Israeli Strike On Evin Prison</b></a><br>Tehran (IRN) <br>death toll: 71<br> <img src='https://c.ndtvimg.com/2025-06/l0no1hsg_evin-prison_625x300_24_June_25.jpeg?im=FitAndFill,algorithm=dnn,width=1200,height=738' class='popup-image' alt='Event Image'><br> <br> ...Israel&#39;s attack on the Evin Prison in Iran&#39;s capital Tehran on June 23 killed 71 people&#44; Iranian judiciary spokesperson Asghar Jahangir said on Sunday. <br><small>Published: 2025/6/29 7:12</small>");
+               markers.addLayer(marker);
+               
+               marker = L.marker([35.69439, 51.62151], {icon: icons["military"]}).bindPopup("<a href='https://timesofindia.indiatimes.com/world/middle-east/middle-east-conflict-iran-warns-israel-may-break-ceasefire-says-prepared-to-give-strong-response/articleshow/122141787.cms'  target='_blank'> <b>Middle East conflict: Iran warns Israel may break ceasefire&#44; says ‘prepared to give strong response’</b></a><br>Tehran (IRN) <br>death toll: 1000<br> <img src='https://static.toiimg.com/thumb/msid-122141870,width-1070,height-580,imgsize-42856,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg' class='popup-image' alt='Event Image'><br> <br> ...Gen Abdolrahim Mousavi      Iran&#39;s top military commander has expressed serious doubts over Israel’s commitment to the ceasefire that ended the exchange of fire between the two nations.Speaking to Saudi Arabia’s defence minister Prince Khalid bin Salman on Sunday&#44; Iran’s chief of staff of armed forces&#44; Abdolrahim Mousavi warned that Tehran is prepared to retaliate if hostilities resume. <br><small>Published: 2025/6/29 10:23</small>");
+               markers.addLayer(marker);
+               marker = L.marker([51.50853, -0.12574]).bindPopup( "<a href='https://timesofindia.indiatimes.com/world/uk/uk-government-condemns-death-to-the-idf-chants-at-glastonbury/articleshow/122141529.cms' target='_blank'> <b>UK government condemns &#39;death to the IDF&#39; chants at Glastonbury</b></a><br> <img src='https://static.toiimg.com/thumb/msid-122141573,width-1070,height-580,imgsize-17112,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg' class='popup-image' alt='Event Image'><br> London (GBR)<br>...: The UK government said on Sunday that the BBC had questions to answer over criticism of Israel by musicians at the Glastonbury festival that police are probing.UK officers are studying videos of rapper Bobby Vylan leading crowds in chants of &quot;Death&#44; death to the IDF&quot;&#44; a reference to the acronym for the Israeli army&#44; during his set on Saturday.They are also examining comments by outspoken Irish rap trio Kneecap&#44; one of whose members wore a T-shirt dedicated to Palestine Action Group&#44; which is about to be banned under UK terror laws.The IDF chants&#44; condemned by the Israeli embassy in London&#44; were broadcast on the BBC&#44; which airs coverage of Britain&#39;s most popular music festival.<br><small>Published: 2025/6/29 9:48</small>" );
+            markers.addLayer(marker);
+            
+               marker = L.marker([32.93448, 73.73102], {icon: icons["natural disaster"]}).bindPopup("<a href='https://timesofindia.indiatimes.com/world/pakistan/14-dead-in-rain-related-incidents-across-pakistan-roof-collapse-electrocutions-reported-rescue-efforts-on/articleshow/122139792.cms'  target='_blank'> <b>14 dead in rain-related incidents across Pakistan: Roof collapse&#44; electrocutions reported; rescue efforts on</b></a><br>Jhelum (PAK) <br>death toll: 14<br> <img src='https://static.toiimg.com/thumb/msid-122139830,width-1070,height-580,imgsize-945879,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg' class='popup-image' alt='Event Image'><br> <br> ...: ANI)      At least 14 people&#44; including five children and three women&#44; were killed and 43 others injured in rain-related incidents across Punjab&#44; Pakistan&#44; between June 25 and 28.The deaths occurred across 14 districts as torrential rain&#44; thunderstorms&#44; lightning&#44; and strong winds swept through the province.According to the Provincial Disaster Management Authority (PDMA) as quoted by ANI&#44; most casualties resulted from roof and wall collapses caused by heavy rainfall.Two men drowned in a flooded ravine in Jhelum&#44; and one person died due to electrocution.In Lahore’s Abbas Nagar&#44; two people died and four others were injured. <br><small>Published: 2025/6/29 6:41</small>");
+               markers.addLayer(marker);
+               
+               marker = L.marker([31.558, 74.35071], {icon: icons["natural disaster"]}).bindPopup("<a href='https://timesofindia.indiatimes.com/world/pakistan/14-dead-in-rain-related-incidents-across-pakistan-roof-collapse-electrocutions-reported-rescue-efforts-on/articleshow/122139792.cms'  target='_blank'> <b>14 dead in rain-related incidents across Pakistan: Roof collapse&#44; electrocutions reported; rescue efforts on</b></a><br>Lahore (PAK) <br>death toll: 14<br> <img src='https://static.toiimg.com/thumb/msid-122139830,width-1070,height-580,imgsize-945879,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg' class='popup-image' alt='Event Image'><br> <br> ...: ANI)      At least 14 people&#44; including five children and three women&#44; were killed and 43 others injured in rain-related incidents across Punjab&#44; Pakistan&#44; between June 25 and 28.The deaths occurred across 14 districts as torrential rain&#44; thunderstorms&#44; lightning&#44; and strong winds swept through the province.According to the Provincial Disaster Management Authority (PDMA) as quoted by ANI&#44; most casualties resulted from roof and wall collapses caused by heavy rainfall.Two men drowned in a flooded ravine in Jhelum&#44; and one person died due to electrocution.In Lahore’s Abbas Nagar&#44; two people died and four others were injured. <br><small>Published: 2025/6/29 6:41</small>");
+               markers.addLayer(marker);
+               marker = L.marker([50.08804, 14.42076]).bindPopup( "<a href='https://www.smh.com.au/world/asia/taiwan-s-vice-president-went-to-europe-china-followed-and-planned-to-stage-car-crash-20250629-p5mb3m.html?ref=rss&utm_medium=rss&utm_source=rss_world' target='_blank'> <b>Taiwan’s vice president went to Europe. China followed and ‘planned intimidation’</b></a><br> <img src='https://static.ffx.io/images/$zoom_0.5295%2C$multiply_0.7554%2C$ratio_1.776846%2C$width_1059%2C$x_0%2C$y_42/t_crop_custom/q_86%2Cf_auto/t_smh_no_label_no_age_social_wm/e495f89920ec62e9e4c7def0c5883f0db5f2df4a' class='popup-image' alt='Event Image'><br> Prague (CZE)<br>...-khim&#44; says she won’t be intimidated by China after Czech military intelligence said Chinese diplomats and secret service followed Hsiao and planned to intimidate her physically when she visited Prague last year.<br><small>Published: 2025/6/29 3:51</small>" );
+            markers.addLayer(marker);
+            
+               marker = L.marker([50.45466, 30.5238], {icon: icons["military"]}).bindPopup("<a href='https://abcnews.go.com/International/wireStory/russia-launches-biggest-aerial-attack-ukraine-start-war-123315185'  target='_blank'> <b>Russia launches biggest aerial attack on Ukraine since the start of the war</b></a><br>Kyiv (UKR) <br>death toll: 0<br> <img src='https://s.abcnews.com/images/US/abc_news_default_2000x2000_update_16x9_992.jpg' class='popup-image' alt='Event Image'><br> <br> ...Russia has launched its biggest aerial attack against Ukraine overnight&#44; part of an escalating bombing campaign that has further dashed hopes for a breakthrough in efforts to end the 3-year-old war  Russia launches biggest aerial attack on Ukraine since the start of the war  KYIV&#44; Ukraine -- Russia launched its biggest aerial attack against Ukraine overnight&#44; a Ukrainian official said Sunday&#44; part of an escalating bombing campaign that has further dashed hopes for a breakthrough in efforts to end the 3-year-old war. <br><small>Published: 2025/6/29 7:09</small>");
+               markers.addLayer(marker);
+               
+               marker = L.marker([28.63576, 77.22445], {icon: icons["unknown"]}).bindPopup("<a href='https://abcnews.go.com/International/wireStory/3-killed-dozen-hospitalized-crowd-surges-eastern-india-123314906'  target='_blank'> <b>At least 3 killed as crowd surges at eastern India Hindu festival</b></a><br>New Delhi (IND) <br>death toll: 3<br> <img src='https://s.abcnews.com/images/US/abc_news_default_2000x2000_update_16x9_992.jpg' class='popup-image' alt='Event Image'><br> <br> ...Three people have been killed and more than a dozen hospitalized following a sudden crowd surge at a popular Hindu festival in eastern India’s coastal town of Puri  At least 3 killed as crowd surges at eastern India Hindu festival  NEW DELHI -- Three people were killed and more than a dozen hospitalized Sunday following a sudden crowd surge at a popular Hindu festival in eastern India&#44; a senior government official said. <br><small>Published: 2025/6/29 7:15</small>");
+               markers.addLayer(marker);
+               
+               marker = L.marker([19.79825, 85.82494], {icon: icons["unknown"]}).bindPopup("<a href='https://abcnews.go.com/International/wireStory/3-killed-dozen-hospitalized-crowd-surges-eastern-india-123314906'  target='_blank'> <b>At least 3 killed as crowd surges at eastern India Hindu festival</b></a><br>Puri (IND) <br>death toll: 3<br> <img src='https://s.abcnews.com/images/US/abc_news_default_2000x2000_update_16x9_992.jpg' class='popup-image' alt='Event Image'><br> <br> ...“There was a sudden crowd surge of devotees for having a glimpse of the Hindu deities during which few people either fainted&#44; felt suffocated or complained of breathlessness&#44;” said Siddharth Shankar Swain&#44; the top government official in Puri. <br><small>Published: 2025/6/29 7:15</small>");
+               markers.addLayer(marker);
+               
+               marker = L.marker([45.43713, 12.33265], {icon: icons["protest/unrest"]}).bindPopup("<a href='https://www.npr.org/2025/06/28/g-s1-75158/kisses-yes-bezos-no-protesters-say-as-bezos-wedding-stirs-controversy-in-venice'  target='_blank'> <b>&#39;Kisses yes&#44; Bezos No&#44;&#39; protesters say&#44; as Bezos wedding stirs controversy in Venice</b></a><br>Venice (ITA) <br>death toll: 0<br> <img src='https://npr.brightspotcdn.com/dims3/default/strip/false/crop/4000x2250+0+208/resize/1400/quality/100/format/jpeg/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F05%2F37%2Fd58140d14f85adf183a7e4868ca0%2Fap25179590136753.jpg' class='popup-image' alt='Event Image'><br> <br> ...&#39;Kisses yes&#44; Bezos No&#44;&#39; protesters say&#44; as Bezos wedding stirs controversy in Venice  toggle caption Antonio Calanni/AP/AP  VENICE&#44; Italy — Hundreds of protesters marched through Venice&#39;s central streets on Saturday to say &quot;No&quot; to billionaire Jeff Bezos&#44; his bride and their much-awaited wedding extravaganza&#44; which reached its third and final day amid celebrity-crowded parties and the outcries of tired residents. <br><small>Published: 2025/6/29 1:13</small>");
+               markers.addLayer(marker);
+               
+               marker = L.marker([35.69439, 51.62151], {icon: icons["military"]}).bindPopup("<a href='https://www.aljazeera.com/gallery/2025/6/29/aftermath-of-deadly-israeli-attack-on-tehrans-evin-prison?traffic_source=rss'  target='_blank'> <b>Aftermath of deadly Israeli attack on Tehran’s Evin Prison</b></a><br>Tehran (IRN) <br>death toll: 71<br> <img src='https://www.aljazeera.com/wp-content/uploads/2025/06/AFP__20250629__647H9KD__v1__HighRes__FilesIranIsraelConflictPrisonToll-1751185024.jpg?resize=1920%2C1440' class='popup-image' alt='Event Image'><br> <br> ...Aftermath of deadly Israeli attack on Tehran’s Evin Prison <br><small>Published: 2025/6/29 9:30</small>");
+               markers.addLayer(marker);
+               
+               marker = L.marker([35.69439, 51.62151], {icon: icons["military"]}).bindPopup("<a href='https://www.aljazeera.com/gallery/2025/6/29/aftermath-of-deadly-israeli-attack-on-tehrans-evin-prison?traffic_source=rss'  target='_blank'> <b>Aftermath of deadly Israeli attack on Tehran’s Evin Prison</b></a><br>Tehran (IRN) <br>death toll: 71<br> <img src='https://www.aljazeera.com/wp-content/uploads/2025/06/AFP__20250629__647H9KD__v1__HighRes__FilesIranIsraelConflictPrisonToll-1751185024.jpg?resize=1920%2C1440' class='popup-image' alt='Event Image'><br> <br> ...The strike on Monday&#44; the day before the ceasefire between Israel and Iran took hold&#44; destroyed part of the administrative building at Evin&#44; a large&#44; heavily fortified complex in northern Tehran that rights groups said holds political prisoners and foreign nationals. <br><small>Published: 2025/6/29 9:30</small>");
+               markers.addLayer(marker);
+               marker = L.marker([53.41058, -2.97794]).bindPopup( "<a href='https://english.elpais.com/culture/2025-06-29/bruce-springsteen-vs-donald-trump-10-keys-to-the-critical-patriotism-of-the-last-legend-of-american-rock.html' target='_blank'> <b>Bruce Springsteen vs. Donald Trump: 10 keys to the critical patriotism of the last legend of American rock</b></a><br> <img src='https://imagenes.elpais.com/resizer/v2/LXW4CND7ZJC6BMXC27FVLKEN2I.jpg?auth=211abf9a17c9301a7d9b411dfd7b061ce5f0afa143a80658ba47b71c7735a013&width=1200' class='popup-image' alt='Event Image'><br> Liverpool (GBR)<br>...A couple of weeks ago&#44; he performed alongside Paul McCartney in Liverpool.<br><small>Published: 2025/6/29 4:00</small>" );
+            markers.addLayer(marker);
+            marker = L.marker([9.93333, -84.08333]).bindPopup( "<a href='https://www.nytimes.com/2025/06/29/world/americas/costa-rica-nicaragua-ortega.html' target='_blank'> <b>Refugees Worry: Is Nicaragua Running Assassination Operations in Costa Rica?</b></a><br> <img src='https://static01.nyt.com/images/2025/06/27/multimedia/00int-costa-rica-killings01-photo-wqhm/00int-costa-rica-killings01-photo-wqhm-facebookJumbo.jpg' class='popup-image' alt='Event Image'><br> San José (CRI)<br>...When out in public in San José&#44; the Costa Rican capital&#44; he changed shirts to throw off any would-be followers.<br><small>Published: 2025/6/29 9:01</small>" );
+            markers.addLayer(marker);
+            marker = L.marker([55.75222, 37.61556]).bindPopup( "<a href='https://www.rt.com/russia/620744-russian-mps-driverless-taxis-migrants/?utm_source=rss&utm_medium=rss&utm_campaign=RSS' target='_blank'> <b>Russian MPs call for driverless taxis to replace migrants</b></a><br> <img src='https://mf.b37mrtl.ru/files/2025.06/article/6861192085f5404d8b6831f7.jpg' class='popup-image' alt='Event Image'><br> Moscow (RUS)<br>...In light of this&#44; the letter asked Mishustin to “accelerate the expansion of testing zones in Moscow itself and implement a phased launch of autonomous transportation in other Russian cities that are highly prepared for the experiment.”  The lawmakers argued that deploying driverless taxis nationwide could “quickly replace migrants with automated technologies and ensure a higher level of safety for citizens.” The letter noted that in some Russian cities&#44; migrants make up 10-40% of taxi drivers.<br><small>Published: 2025/6/29 10:30</small>" );
+            markers.addLayer(marker);
+            
+               marker = L.marker([44.80401, 20.46513], {icon: icons["protest/unrest"]}).bindPopup("<a href='https://www.rt.com/news/620733-protesters-call-for-civil-war/?utm_source=rss&utm_medium=rss&utm_campaign=RSS'  target='_blank'> <b>Protesters in Belgrade calling for civil war – Serbian Parliament speaker</b></a><br>Belgrade (SRB) <br>death toll: 0<br> <img src='https://mf.b37mrtl.ru/files/2025.06/article/6860c8d0203027436103c0e5.jpg' class='popup-image' alt='Event Image'><br> <br> ...-government demonstration want to destroy the country  Speaker of the Serbian Parliament Ana Brnabic has accused anti-government protesters in Belgrade of calling for a civil war&#44; after a student-led rally escalated into clashes with police. <br><small>Published: 2025/6/29 6:00</small>");
+               markers.addLayer(marker);
+               marker = L.marker([32.65246, 51.67462]).bindPopup( "<a href='https://www.ndtv.com/world-news/analysis-us-strikes-on-irans-nuke-sites-set-up-cat-and-mouse-hunt-for-missing-uranium-8792296#publisher=newsstand' target='_blank'> <b>Analysis: US Strikes On Iran&#39;s Nuke Sites Set Up &quot;Cat-And-Mouse&quot; Hunt For Missing Uranium</b></a><br> <img src='https://c.ndtvimg.com/2025-06/t0thu3m_irans-nuclear-sites-reuters_625x300_29_June_25.jpeg' class='popup-image' alt='Event Image'><br> Isfahan (IRN)<br>...Following last weekend&#39;s attacks on three of Iran&#39;s top nuclear sites - at Fordow&#44; Natanz and Isfahan - President Donald Trump said the facilities had been &quot;obliterated&quot; by U.S. munitions&#44; including bunker-busting bombs.<br><small>Published: 2025/6/29 13:40</small>" );
+            markers.addLayer(marker);
+            
+               marker = L.marker([-6.82349, 39.26951], {icon: icons["accident"]}).bindPopup("<a href='https://abcnews.go.com/International/wireStory/37-people-killed-bus-collision-remote-part-tanzania-123316348'  target='_blank'> <b>At least 37 people killed in a bus collision in a remote part of Tanzania</b></a><br>Dar es Salaam (TZA) <br>death toll: 50<br> <img src='https://s.abcnews.com/images/US/abc_news_default_2000x2000_update_16x9_992.jpg' class='popup-image' alt='Event Image'><br> <br> ...Officials in Tanzania say dozens of people have been killed when two buses collided and burst into flames in a remote norther part of the country  At least 37 people killed in a bus collision in a remote part of Tanzania  DAR ES SALAAM&#44; Tanzania -- Dozens of people were killed when two buses collided and burst into flames in a remote part of northern Tanzania&#44; officials said. <br><small>Published: 2025/6/29 12:21</small>");
+               markers.addLayer(marker);
+               marker = L.marker([46.516, 6.63282]).bindPopup( "<a href='https://www.haaretz.com/israel-news/sports/2025-06-29/ty-article/.premium/jordan-refuses-to-play-against-israel-at-u19-basketball-world-cup-forfeiting-match/00000197-bb1a-df21-a1df-ffda4ce80000' target='_blank'> <b>Jordan refuses to play against Israel at U19 Basketball World Cup&#44; forfeiting match</b></a><br> <img src='https://img.haarets.co.il/bs/00000197-bb1d-d013-a5b7-bb7d02e60000/ea/d9/ccb284c642bcb0116c1bfee20dec/maye.webp?precrop=1200,697,x0,y52&height=630&width=1200' class='popup-image' alt='Event Image'><br> Lausanne (CHE)<br>...Jordan&#39;s national basketball team has decided not to play against Israel in the second round of the group stages of the Under-19 Basketball World Cup in Lausanne&#44; Switzerland&#44; on Sunday night&#44; a representative of the Jordan Basketball Federation announced.<br><small>Published: 2025/6/29 11:08</small>" );
+            markers.addLayer(marker);
+            
+               marker = L.marker([44.80401, 20.665129999999998], {icon: icons["terrorism"]}).bindPopup("<a href='https://www.aljazeera.com/video/newsfeed/2025/6/29/police-clash-with-protesters-in-serbia-as-tens-of-thousands-demand-election?traffic_source=rss'  target='_blank'> <b>Police clash with protesters in Serbia as tens of thousands demand election</b></a><br>Belgrade (SRB) <br>death toll: 0<br> <img src='https://www.aljazeera.com/wp-content/uploads/2025/06/image-1751198860.jpg?resize=1920%2C1080&quality=80' class='popup-image' alt='Event Image'><br> <br> ...NewsFeed Police clash with protesters in Serbia as tens of thousands demand election  Police in Serbia fired tear gas and arrested dozens as anti-government protests in Belgrade turned violent. <br><small>Published: 2025/6/29 12:11</small>");
+               markers.addLayer(marker);
+               
+               marker = L.marker([22.27832, 114.17469], {icon: icons["protest/unrest"]}).bindPopup("<a href='https://www.aljazeera.com/news/2025/6/29/hong-kong-league-of-social-democrats-announces-disbandment?traffic_source=rss'  target='_blank'> <b>Hong Kong’s League of Social Democrats announces disbandment</b></a><br>Hong Kong (HKG) <br>death toll: 0<br> <img src='https://www.aljazeera.com/wp-content/uploads/2025/06/AP25180183539603-1751192257.jpg?resize=1920%2C1440' class='popup-image' alt='Event Image'><br> <br> ...-democracy party in China-ruled Hong Kong&#44; has announced its disbandment due to “immense political pressure”. <br><small>Published: 2025/6/29 11:21</small>");
+               markers.addLayer(marker);
+               marker = L.marker([38.89511, -77.03637]).bindPopup( "<a href='https://www.aljazeera.com/news/2025/6/29/trump-defends-netanyahu-attacks-israeli-prosecutors-over-corruption-trial?traffic_source=rss' target='_blank'> <b>Trump defends Netanyahu&#44; attacks Israeli prosecutors over corruption trial</b></a><br> <img src='https://www.aljazeera.com/wp-content/uploads/2025/05/2025-04-07T172847Z_886595328_RC20TDACUPLX_RTRMADP_3_USA-TRUMP-TARIFFS-ISRAEL-1746544747.jpg?resize=1920%2C1440' class='popup-image' alt='Event Image'><br> Washington (USA)<br>...United States President Donald Trump has launched a scathing attack on Israeli prosecutors over Prime Minister Benjamin Netanyahu’s ongoing corruption trial&#44; calling it “insanity” and linking Washington’s financial support to the proceedings.<br><small>Published: 2025/6/29 10:58</small>" );
+            markers.addLayer(marker);
+            marker = L.marker([44.80401, 20.665129999999998]).bindPopup( "<a href='https://tass.com/world/1982723' target='_blank'> <b>Six officers&#44; two civilians injured during protests in Belgrade — interior ministry</b></a><br> <img src='https://tass.com/img/blocks/common/tass_logo_share_eng.png' class='popup-image' alt='Event Image'><br> Belgrade (SRB)<br>...Six officers&#44; two civilians injured during protests in Belgrade — interior ministry<br><small>Published: 2025/6/29 4:39</small>" );
+            markers.addLayer(marker);
+            marker = L.marker([44.80401, 20.665129999999998]).bindPopup( "<a href='https://tass.com/world/1982723' target='_blank'> <b>Six officers&#44; two civilians injured during protests in Belgrade — interior ministry</b></a><br> <img src='https://tass.com/img/blocks/common/tass_logo_share_eng.png' class='popup-image' alt='Event Image'><br> Belgrade (SRB)<br>...Six police officers and two civilians were injured as a result of Saturday’s violent protests in Belgrade&#44; Serbia’s police director Dragan Vailjevic said in an official statement&#44; published by the Interior Ministry’s press service.<br><small>Published: 2025/6/29 4:39</small>" );
+            markers.addLayer(marker);
+            marker = L.marker([44.80401, 20.665129999999998]).bindPopup( "<a href='https://tass.com/world/1982713' target='_blank'> <b>Belgrade protestors called for civil war in Serbia — parliament speaker</b></a><br> <img src='https://tass.com/img/blocks/common/tass_logo_share_eng.png' class='popup-image' alt='Event Image'><br> Belgrade (SRB)<br>...Participants of Saturday’s protests in Belgrade used the rally to call for a civil war&#44; Serbian parliament Speaker Ana Brnabic said.<br><small>Published: 2025/6/29 3:45</small>" );
+            markers.addLayer(marker);
+            marker = L.marker([44.80401, 20.665129999999998]).bindPopup( "<a href='https://tass.com/world/1982703' target='_blank'> <b>Hundreds of Serbian president’s supporters remain outside parliament despite protests</b></a><br> <img src='https://tass.com/img/blocks/common/tass_logo_share_eng.png' class='popup-image' alt='Event Image'><br> Belgrade (SRB)<br>...A few hundred of Serbian President Aleksandar Vucic’s supporters remain in a tent camp between the parliament building and the presidential palace in Belgrade despite ongoing protests in adjacent streets&#44; a TASS correspondent reported.<br><small>Published: 2025/6/29 1:57</small>" );
+            markers.addLayer(marker);
+            
+               marker = L.marker([31.50161, 34.666720000000005], {icon: icons["humanitarian crisis"]}).bindPopup("<a href='https://www.aljazeera.com/news/2025/6/29/israel-kills-nearly-600-palestinians-at-aid-centres-all-you-need-to-know?traffic_source=rss'  target='_blank'> <b>Israel kills nearly 600 Palestinians at aid centres: All you need to know</b></a><br>Gaza (PSE) <br>death toll: 600<br> <img src='https://www.aljazeera.com/wp-content/uploads/2025/06/AP25177367415642-1750933615.jpg?resize=1920%2C1440' class='popup-image' alt='Event Image'><br> <br> ...Hundreds killed seeking aid in Gaza as famine deepens and limited food access leaves hundreds of thousands starving and malnourished. <br><small>Published: 2025/6/29 14:17</small>");
+               markers.addLayer(marker);
+               
+               marker = L.marker([31.50161, 34.666720000000005], {icon: icons["military"]}).bindPopup("<a href='https://timesofindia.indiatimes.com/world/middle-east/dont-know-if-we-will-wake-up-israel-launches-fresh-new-attacks-in-gaza-claims-23-lives/articleshow/122145289.cms'  target='_blank'> <b>‘Don’t know if we will wake up’: Israel launches fresh new attacks in Gaza; claims 23 lives</b></a><br>Gaza (PSE) <br>death toll: 23<br> <img src='https://static.toiimg.com/thumb/msid-122145318,width-1070,height-580,imgsize-1643702,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg' class='popup-image' alt='Event Image'><br> <br> ...‘Don’t know if we will wake up’: Israel launches fresh new attacks in Gaza; claims 23 lives <br><small>Published: 2025/6/29 17:00</small>");
+               markers.addLayer(marker);
+               
+               marker = L.marker([31.50161, 34.666720000000005], {icon: icons["military"]}).bindPopup("<a href='https://timesofindia.indiatimes.com/world/middle-east/dont-know-if-we-will-wake-up-israel-launches-fresh-new-attacks-in-gaza-claims-23-lives/articleshow/122145289.cms'  target='_blank'> <b>‘Don’t know if we will wake up’: Israel launches fresh new attacks in Gaza; claims 23 lives</b></a><br>Gaza (PSE) <br>death toll: 23<br> <img src='https://static.toiimg.com/thumb/msid-122145318,width-1070,height-580,imgsize-1643702,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg' class='popup-image' alt='Event Image'><br> <br> ...AP file photo      In a fresh new offensive&#44; Israeli airstrikes and gunfire have claimed the lives of 23 people&#44; including children&#44; in the war-battered territory of Gaza on Sunday&#44; as per Gaza’s civil defence agency&#44; reported AFP.Mahmud Bassal&#44; the civil defence spokesman&#44; told AFP that his services &quot;transported 23 martyrs&#44; including several children and women&quot; who were killed in various locations around the besieged territory.The Israeli military told AFP it couldn’t comment on the reported incidents but said its ongoing campaign aims to &quot;dismantle Hamas military capabilities&quot; following the group&#39;s October 2023 attack on Israel.Bassal informed that two children were killed in an air strike in their home&#44; which was completely destroyed&#44; in the Zeitun neighbourhood of Gaza City early on Sunday morning.A family member&#44; Abdel Rahman Azzam&#44; 45&#44; told AFP that he had heard “huge explosions” coming from his relative’s house&#44; when he ”rushed out in panic and saw the house destroyed and on fire&#44;&quot; he said. <br><small>Published: 2025/6/29 17:00</small>");
+               markers.addLayer(marker);
+               marker = L.marker([31.50161, 34.46672]).bindPopup( "<a href='https://www.haaretz.com/israel-news/2025-06-29/ty-article/.premium/israeli-soldier-sent-to-military-prison-for-teasing-troops-despite-gaza-related-ptsd/00000197-bc2d-df21-a1df-fdedd36f0000' target='_blank'> <b>Israeli soldier sent to military prison for teasing troops despite Gaza-related PTSD</b></a><br> <img src='https://img.haarets.co.il/bs/00000197-bc60-dd94-addf-bf7121880000/3a/15/7d60377a4ee0953e138632fd54e1/hayal.jpg?precrop=1338,778,x12,y0&height=630&width=1200' class='popup-image' alt='Event Image'><br> Gaza (PSE)<br>...Israeli soldier sent to military prison for teasing troops despite Gaza-related PTSD<br><small>Published: 2025/6/29 16:43</small>" );
+            markers.addLayer(marker);
+            marker = L.marker([41.01384, 28.94966]).bindPopup( "<a href='https://www.haaretz.com/middle-east-news/2025-06-29/ty-article/turkish-police-detain-dozens-at-banned-istanbul-pride-march-lawmaker-says/00000197-bc21-d6b3-abf7-fcf3961d0000' target='_blank'> <b>Turkish police detain dozens at banned Istanbul Pride march&#44; lawmaker says</b></a><br> <img src='https://img.haarets.co.il/bs/00000197-bc27-dd94-addf-bf7719e40000/db/61/5eaf652c4c45b8f9d9ea377657c6/247283.jpg?height=630&width=1200' class='popup-image' alt='Event Image'><br> Istanbul (TUR)<br>...Turkish police detained at least 30 people in central Istanbul on Sunday as they tried to take part in a Pride March&#44; which authorities had banned as part of a years-long clampdown on LGBTQ+ events&#44; an opposition politician said.<br><small>Published: 2025/6/29 15:08</small>" );
+            markers.addLayer(marker);
+            
+               marker = L.marker([44.80401, 20.665129999999998], {icon: icons["terrorism"]}).bindPopup("<a href='https://www.aljazeera.com/news/2025/6/29/serbias-president-vows-more-arrests-after-huge-antigovernment-protests?traffic_source=rss'  target='_blank'> <b>Serbia’s president vows more arrests after huge antigovernment protests</b></a><br>Belgrade (SRB) <br>death toll: 0<br> <img src='https://www.aljazeera.com/wp-content/uploads/2025/06/AP25179793115158-1751214373.jpg?resize=1920%2C1440' class='popup-image' alt='Event Image'><br> <br> ...At a news conference on Sunday&#44; the populist leader accused the organisers of Saturday’s student-led protest in the capital&#44; Belgrade&#44; of inciting violence and attacks on police. <br><small>Published: 2025/6/29 17:05</small>");
+               markers.addLayer(marker);
+               marker = L.marker([35.69439, 51.42151]).bindPopup( "<a href='https://www.aljazeera.com/video/the-bottom-line/2025/6/29/was-the-iran-war-to-establish-israels-control-over-the-middle-east?traffic_source=rss' target='_blank'> <b>Was the Iran war to establish Israel’s control over the Middle East?</b></a><br> <img src='https://www.aljazeera.com/wp-content/uploads/2025/06/image-1751212837.jpg?resize=1920%2C1080&quality=80' class='popup-image' alt='Event Image'><br> Tehran (IRN)<br>...Hours before a ceasefire between the US&#44; Israel and Iran was announced&#44; Nasr told host Steve Clemons that “the US doesn’t have a regime change option in Iran” and should be wary of humiliating Tehran&#44; which would lead to long-term consequences.<br><small>Published: 2025/6/29 16:00</small>" );
+            markers.addLayer(marker);
+            
+    map.addLayer(markers);
+    </script>
+</body>
+</html>
