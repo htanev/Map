@@ -50,9 +50,16 @@
             fullscreenControl: true
         }).setView([20, 0], 2);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+//        L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+//            attribution: '© OpenStreetMap contributors'
+//        }).addTo(map);
+
+        
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a> | &copy; OpenStreetMap contributors',
+        subdomains: 'abcd',
+        maxZoom: 19
+    }).addTo(map);
 
         var markers = L.markerClusterGroup();
 
